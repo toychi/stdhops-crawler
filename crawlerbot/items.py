@@ -16,3 +16,6 @@ class CrawlerbotItem(scrapy.Item):
 class ThaihometownItem(scrapy.Item):
     name = scrapy.Field()
     maps = scrapy.Field()
+	
+class RenthomefinderItem(scrapy.Item):
+    maps = scrapy.Field()
