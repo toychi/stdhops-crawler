@@ -6,6 +6,11 @@ from crawlerbot.items import ThaihometownItem
 
 class ThaihometownHouseSpider(scrapy.Spider):
     name = 'thaihometown_house'
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            'crawlerbot.pipelines.ThaihometownPipeline': 400
+        }
+    }
     allowed_domains = ['thaihometown.com']
     start_urls = ['https://www.thaihometown.com/search/?page=2&Type=Home&Country=%A1%C3%D8%A7%E0%B7%BE%C1%CB%D2%B9%A4%C3&Submit=Search']
 
@@ -23,5 +28,6 @@ class ThaihometownHouseSpider(scrapy.Spider):
         for h in units:
             item = ThaihometownItem()
             item['name'] = h.xpath('a/text()').extract_first()
+            item['link'] = h.xpath('a/@href').extract_first()
             item['maps'] = h.xpath('table/tr/td[@class="tablelist"]/a[contains(@href, "maps")]/@href').extract_first()
             yield item

@@ -19,3 +19,12 @@ class ThaihometownItem(scrapy.Item):
 	
 class RenthomefinderItem(scrapy.Item):
     maps = scrapy.Field()
+    link = scrapy.Field()
+
+class HouseItem(scrapy.Item):
+    id = scrapy.Field()
+    name = scrapy.Field()
+    room = scrapy.Field()
+    area = scrapy.Field()
+    price = scrapy.Field()
+    latlng = scrapy.Field()
