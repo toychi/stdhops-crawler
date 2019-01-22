@@ -1,8 +1,8 @@
 import scrapy
 
 class thaigerSpider(scrapy.Spider):
-	name = 'rentthaigerspider'
-	start_urls = ['https://property.thethaiger.com/property-for-rent/bangkok']
+	name = 'salethaigerspider'
+	start_urls = ['https://property.thethaiger.com/property-for-sale/bangkok']
 
 	def parse(self, response):
 		SET_SELECTOR = "//div[@class='marker-link list_search']"
@@ -12,7 +12,7 @@ class thaigerSpider(scrapy.Spider):
 			LOCATION_SELECTOR = './/div[@class="description_search"]/div[@class="hader_title"]/span[@class="location n-table"]/text()'
 			ID_SELECTOR = './/div[@class="description_search"]/div[@class="data-list "]/div[@class="tooltipPjax"]/strong/text()'
 			TYPE_SELECTOR = './/div[@class="description_search"]/div[@class="hader_title"]/span[@class="type n-photo"]/text()'
-			SIZE_SELECTOR = './/div[@class="slide_search"]/div[@class="row bt-detail black-bg n-table"]/div[@class="col-md-12 text-left"]/div[@class="btn-project"]/div[@class="last"]/strong/text()'
+			SIZE_SELECTOR = './/div[@class="slide_search"]/div[@class="row bt-detail black-bg n-table"]/div[@class="col-md-12 text-left"]/div[@class="btn-project"]/div[@class="last  "]/strong/span[@class="block-m"]/text()'
 			PRICE_SELECTOR = './/div[@class="slide_search"]/div[@class="row bt-detail black-bg n-table"]/div[@class="col-md-12 text-left"]/span[@class="listTotalPrice"]/text()'
 			yield {
 				'name': t.xpath(NAME_SELECTOR).extract_first(),
@@ -20,7 +20,7 @@ class thaigerSpider(scrapy.Spider):
 				'id': t.xpath(ID_SELECTOR).extract_first(),
 				'type': t.xpath(TYPE_SELECTOR).extract_first(),
 				'size': t.xpath(SIZE_SELECTOR).extract_first(),
-				'rentalprice': t.xpath(PRICE_SELECTOR).extract_first(),
+				'saleprice': t.xpath(PRICE_SELECTOR).extract_first(),
 			}
 			
 		NEXT_PAGE_SELECTOR = '.next a ::attr(href)'
