@@ -7,6 +7,7 @@
 
 from scrapy.exporters import JsonLinesItemExporter
 import json
+import os
 
 
 class CrawlerbotPipeline(object):
@@ -14,11 +15,20 @@ class CrawlerbotPipeline(object):
         return item
 
 
-class ThaihometownPipeline(object):
+class ThaihometownLinksPipeline(object):
     def open_spider(self, spider):
         print('Exporter opened')
+        # Create directory
+        dirName = 'Links/Thaihometown'
 
-        self.file = open('thaihometown.json', 'w')
+        try:
+            # Create target Directory
+            os.makedirs(dirName)
+            print("Directory ", dirName, " Created ")
+        except FileExistsError:
+            print("Directory ", dirName, " already exists")
+
+        self.file = open('Links/Thaihometown/thaihometown_links.json', 'w', encoding='utf8')
         self.file.write('[')
         # self.exporter = JsonLinesItemExporter(self.file)
 

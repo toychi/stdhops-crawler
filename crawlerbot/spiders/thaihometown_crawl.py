@@ -19,6 +19,7 @@ class ThaihometownCrawlSpider(scrapy.Spider):
         item['name'] = response.xpath('//div[@class="namedesw9"]/h1/text()').extract_first()
         item['room'] = response.xpath(
             '//td[contains(text(),"จำนวนห้อง")]/../td[@class="table_set3"]/a/text()').extract()
+        item['district'] = response.xpath('//td[contains(text(),"เขตที่ตั้ง")]/../td[@class="table_set3"]/a/text()').extract_first()
         item['area'] = response.xpath('//div[@class="sqm_right"]/a/text()').extract_first()
         item['price'] = response.xpath('//a[@class="linkprice"]/text()').extract_first()
         map_url = response.xpath('//iframe[@id="GMap"]/@src').extract_first()
