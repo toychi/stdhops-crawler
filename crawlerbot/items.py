@@ -13,15 +13,18 @@ class CrawlerbotItem(scrapy.Item):
     # name = scrapy.Field()
     pass
 
+
 class HouseLinkItem(scrapy.Item):
     id = scrapy.Field()
     name = scrapy.Field()
     link = scrapy.Field()
     maps = scrapy.Field()
-	
+
+
 class RenthomefinderItem(scrapy.Item):
     maps = scrapy.Field()
     link = scrapy.Field()
+
 
 class HouseItem(scrapy.Item):
     id = scrapy.Field()
@@ -31,3 +34,4 @@ class HouseItem(scrapy.Item):
     area = scrapy.Field()
     price = scrapy.Field()
     latlng = scrapy.Field()
+    date = scrapy.Field()

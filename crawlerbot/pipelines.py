@@ -7,7 +7,9 @@
 
 from scrapy.exporters import JsonLinesItemExporter
 import json
+import re
 import os
+import pymongo
 
 
 class CrawlerbotPipeline(object):
@@ -28,20 +30,35 @@ class ThaihometownLinksPipeline(object):
         except FileExistsError:
             print("Directory ", dirName, " already exists")
 
-        self.file = open('Links/Thaihometown/thaihometown_links.json', 'w', encoding='utf8')
-        self.file.write('[')
-        # self.exporter = JsonLinesItemExporter(self.file)
+        self.json_list = []
+        # self.file.write('[')
 
     def close_spider(self, spider):
+        with open('Links/Thaihometown/thaihometown_links.json', 'w', encoding='utf8') as file:
+            file.write(json.dumps(self.json_list, indent=0, separators=(',', ':'), ensure_ascii=False))
         print('Exporter closed')
-        self.file.write(']')
-        self.file.close()
 
     def process_item(self, item, spider):
-        line = json.dumps(dict(item), ensure_ascii=False) + ",\n"
-        self.file.write(line)
+        self.json_list.append(dict(item))
         return item
-        
-    
 
 
+class MongoPipeline(object):
+
+    def __init__(self):
+        self.mongo_uri = 'mongodb://127.0.0.1:27017'
+        self.mongo_db = 'stdhops'
+        self.collection_name = 'house'
+
+    def open_spider(self, spider):
+        self.client = pymongo.MongoClient(self.mongo_uri)
+        self.db = self.client[self.mongo_db]
+        print("Connected to MongoDB")
+
+    def close_spider(self, spider):
+        self.client.close()
+        print("Connection is closed")
+
+    def process_item(self, item, spider):
+        self.db[self.collection_name].insert(dict(item))
+        return item

@@ -11,6 +11,13 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class ThaihometownCrawlSpider(scrapy.Spider):
     name = 'thaihometown_crawl'
+
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            'crawlerbot.pipelines.MongoPipeline': 400
+        }
+    }
+
     start_urls = ['https://www.thaihometown.com/home/516746']
 
     def parse(self, response):
@@ -42,6 +49,7 @@ class ThaihometownCrawlSpider(scrapy.Spider):
         else:
             latlng = ','
         item['latlng'] = latlng.split(',')
+        item['date'] = response.xpath('//div[@class="datedetail"]/text()').extract_first()
 
         with open('house.json', 'w', encoding='utf8') as f:
             json.dump(dict(item), f, ensure_ascii=False)
@@ -50,7 +58,7 @@ class ThaihometownCrawlSpider(scrapy.Spider):
         #     line = json.dumps(dict(item)) + ",\n"
         #     d.write(line)
 
-        pass
+        return item
 
     def parse_latlng(self, response):
         text = response.xpath('//script[@type="text/javascript"]/text()').extract_first()
