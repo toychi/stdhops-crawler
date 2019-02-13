@@ -19,3 +19,7 @@ class ThaihometownItem(scrapy.Item):
 	
 class RenthomefinderItem(scrapy.Item):
     maps = scrapy.Field()
+
+class aqiItem(scrapy.Item):
+	aqi = scrapy.Field()
+	city = scrapy.Field()

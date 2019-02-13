@@ -68,8 +68,9 @@ FILE_NAME = 'path/outputfile.ext'
 ITEM_PIPELINES = {
    # 'crawlerbot.pipelines.CrawlerbotPipeline': 300,
    # 'crawlerbot.pipelines.ThaihometownPipeline' : 600
-   #'crawlerbot.pipelines.HomefinderPipeline' : 600
-   'crawlerbot.pipelines.ThaigerPipeline' : 600
+   # 'crawlerbot.pipelines.HomefinderPipeline' : 600
+   # 'crawlerbot.pipelines.ThaisrcPipeline' : 600
+   'crawlerbot.pipelines.aqiPipeline' : 600
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
