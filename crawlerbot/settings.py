@@ -70,7 +70,9 @@ ITEM_PIPELINES = {
    # 'crawlerbot.pipelines.ThaihometownPipeline' : 600
    # 'crawlerbot.pipelines.HomefinderPipeline' : 600
    # 'crawlerbot.pipelines.ThaisrcPipeline' : 600
-   'crawlerbot.pipelines.aqiPipeline' : 600
+   # 'crawlerbot.pipelines.HflinkrentPipeline' : 600
+   # 'crawlerbot.pipelines.HflinksalePipeline' : 600
+   #'crawlerbot.pipelines.aqiPipeline' : 600
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

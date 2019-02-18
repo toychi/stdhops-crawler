@@ -6,6 +6,7 @@ class thaisrcSpider(scrapy.Spider):
 
 	def parse(self, response):
 		SET_SELECTOR = "//a[@data-pid='กท']"
+		กท
 		for t in response.xpath(SET_SELECTOR):
 			print(t.extract_first())
 

@@ -33,11 +33,11 @@ class ThaihometownPipeline(object):
         return item
 		
 		
-class HomefinderPipeline(object):
+class HflinkrentPipeline(object):
     def open_spider(self, spider):
         print('Exporter opened')
 
-        self.file = open('homefinder.json', 'a')
+        self.file = open('hflink.json', 'a')
         self.file.write('[')
         # self.exporter = JsonLinesItemExporter(self.file)
 
@@ -50,7 +50,25 @@ class HomefinderPipeline(object):
         line = json.dumps(dict(item)) + ",\n"
         self.file.write(line)
         return item
+		
+class HflinksalePipeline(object):
+    def open_spider(self, spider):
+        print('Exporter opened')
 
+        self.file = open('hflink.json', 'a')
+        self.file.write('[')
+        # self.exporter = JsonLinesItemExporter(self.file)
+
+    def close_spider(self, spider):
+        print('Exporter closed')
+        self.file.write(']')
+        self.file.close()
+        
+    def process_item(self, item, spider):
+        line = json.dumps(dict(item)) + ",\n"
+        self.file.write(line)
+        return item
+		
 class ThaigerPipeline(object):
     def open_spider(self, spider):
         print('Exporter opened')
@@ -87,20 +105,3 @@ class ThaisrcPipeline(object):
         self.file.write(line)
         return item
 	
-class aqiPipeline(object):
-    def open_spider(self, spider):
-        print('Exporter opened')
-
-        self.file = open('aqi.json', 'a')
-        self.file.write('[')
-        # self.exporter = JsonLinesItemExporter(self.file)
-
-    def close_spider(self, spider):
-        print('Exporter closed')
-        self.file.write(']')
-        self.file.close()
-        
-    def process_item(self, item, spider):
-        line = json.dumps(dict(item)) + ",\n"
-        self.file.write(line)
-        return item
