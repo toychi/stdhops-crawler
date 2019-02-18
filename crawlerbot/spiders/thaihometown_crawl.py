@@ -18,7 +18,13 @@ class ThaihometownCrawlSpider(scrapy.Spider):
         }
     }
 
-    start_urls = ['https://www.thaihometown.com/home/516746']
+    with open('Links/Thaihometown/thaihometown_links.json','r') as f:
+        data = json.load(f)
+
+
+    urls = [d['link'] for d in data]
+    start_urls = urls[:1000]
+    # start_urls = ['https://www.thaihometown.com/home/516746']
 
     def parse(self, response):
         item = HouseItem()
@@ -50,13 +56,6 @@ class ThaihometownCrawlSpider(scrapy.Spider):
             latlng = ','
         item['latlng'] = latlng.split(',')
         item['date'] = response.xpath('//div[@class="datedetail"]/text()').extract_first()
-
-        with open('house.json', 'w', encoding='utf8') as f:
-            json.dump(dict(item), f, ensure_ascii=False)
-
-        # with open('house2.json', 'w') as d:
-        #     line = json.dumps(dict(item)) + ",\n"
-        #     d.write(line)
 
         return item
 
