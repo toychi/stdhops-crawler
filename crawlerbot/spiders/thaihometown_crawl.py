@@ -16,14 +16,15 @@ class ThaihometownCrawlSpider(scrapy.Spider):
         'ITEM_PIPELINES': {
             'crawlerbot.pipelines.MongoPipeline': 400
         }
+        # 'LOG_FILE': 'crawlerbot/logs/demospider.log',
+        # 'LOG_LEVEL': 'DEBUG'
     }
 
-    with open('Links/Thaihometown/thaihometown_links.json','r') as f:
+    with open('Links/Thaihometown/thaihometown_links.json', 'r') as f:
         data = json.load(f)
 
-
     urls = [d['link'] for d in data]
-    start_urls = urls[:1000]
+    start_urls = urls[:10]
     # start_urls = ['https://www.thaihometown.com/home/516746']
 
     def parse(self, response):
@@ -35,34 +36,37 @@ class ThaihometownCrawlSpider(scrapy.Spider):
         item['district'] = response.xpath('//td[contains(text(),"เขตที่ตั้ง")]/../td[@class="table_set3"]/a/text()').extract_first()
         item['area'] = response.xpath('//div[@class="sqm_right"]/a/text()').extract_first()
         item['price'] = response.xpath('//a[@class="linkprice"]/text()').extract_first()
+        item['date'] = response.xpath('//div[@class="datedetail"]/text()').extract_first()
+
         map_url = response.xpath('//iframe[@id="GMap"]/@src').extract_first()
         ggmap_url = response.xpath('//div[@class="maps_google2"]/a/@href').extract_first()
         if map_url:
-            latlng = scrapy.Request(map_url, callback=self.parse_latlng)
+            request = scrapy.Request(map_url, callback=self.parse_latlng)
+            request.meta['item'] = item
+            return request
         elif ggmap_url:
             browser = webdriver.Chrome()
             browser.get(ggmap_url)
             wait = WebDriverWait(browser, 10)
-            browser.switch_to.frame(browser.find_element_by_xpath("//div[@id='divMapFull']/iframe"))
+            browser.switch_to.frame(browser.find_element_by_xpath('//div[@id="divMapFull"]/iframe'))
             # nav = browser.find_element_by_xpath("//div[@class='google-maps-link']/a")
-            nav = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='google-maps-link']/a")))
+            nav = wait.until(EC.presence_of_element_located((By.XPATH, '//a[contains(text(),"View larger map")]')))
             map_url = nav.get_attribute('href')
             browser.close()
             try:
-                latlng = re.search('=.+&z', map_url).group(0)[1:-2]
+                item['latlng'] = re.search('=.+&z', map_url).group(0)[1:-2].split(',')
             except AttributeError:
-                latlng = ','
+                item['latlng'] = ','.split(',')
         else:
-            latlng = ','
-        item['latlng'] = latlng.split(',')
-        item['date'] = response.xpath('//div[@class="datedetail"]/text()').extract_first()
+            item['latlng'] = ','.split(',')
 
         return item
 
     def parse_latlng(self, response):
+        item = response.meta['item']
         text = response.xpath('//script[@type="text/javascript"]/text()').extract_first()
         try:
-            latlng = re.search('\(.+\)', text).group(0)[1:-1]
+            item['latlng'] = re.search('\(.+\)', text).group(0)[1:-1].split(',')
         except AttributeError:
-            latlng = ','
-        return latlng
+            item['latlng'] = ','.split(',')
+        return item
