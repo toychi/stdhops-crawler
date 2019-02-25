@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  crawler:
+    build: .
+    volumes:
+      - .:/usr/src/app
+  mymongodb:
+    image: mongo:latest
+    container_name: "mymongodb"
+    environment:
+      - MONGO_DATA_DIR=/home/stdhops/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ./data/db:/home/stdhops/data/db
+    ports:
+      - 27017:27017
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
