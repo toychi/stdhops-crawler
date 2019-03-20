@@ -9,26 +9,33 @@ import scrapy
 
 
 class CrawlerbotItem(scrapy.Item):
-	# define the fields for your item here like:
-	# name = scrapy.Field()
-	pass
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    pass
+
 
 class ThaihometownItem(scrapy.Item):
-	name = scrapy.Field()
-	maps = scrapy.Field()
-	
-class HflinkItem(scrapy.Item):
-	name = scrapy.Field()
-	link = scrapy.Field()
+    name = scrapy.Field()
+    maps = scrapy.Field()
 
-class HfrentItem(scrapy.Item):
-	id = scrapy.Field()
-	name = scrapy.Field()
-	area = scrapy.Field()
-	price = scrapy.Field()
-	bath = scrapy.Field()
-	bed = scrapy.Field()
-	
+
+class HflinkItem(scrapy.Item):
+    name = scrapy.Field()
+    link = scrapy.Field()
+
+
+class HfItem(scrapy.Item):
+    id = scrapy.Field()
+    name = scrapy.Field()
+    type = scrapy.Field()
+    area = scrapy.Field()
+    size = scrapy.Field()
+    price = scrapy.Field()
+    bed = scrapy.Field()
+    bath = scrapy.Field()
+    latlng = scrapy.Field()
+
+
 class ThaigerlinkrentItem(scrapy.Item):
-	name = scrapy.Field()
-	link = scrapy.Field()
+    name = scrapy.Field()
+    link = scrapy.Field()
