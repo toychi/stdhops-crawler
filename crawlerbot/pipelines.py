@@ -10,6 +10,7 @@ import json
 import re
 import os
 import pymongo
+import codecs
 
 
 class CrawlerbotPipeline(object):
@@ -63,3 +64,100 @@ class MongoPipeline(object):
     def process_item(self, item, spider):
         self.db[self.collection_name].insert(dict(item))
         return item
+
+
+class HflinkrentPipeline(object):
+    def open_spider(self, spider):
+        print('Exporter opened')
+
+        self.file = open('hflink.json', 'a')
+        self.file.write('[')
+        # self.exporter = JsonLinesItemExporter(self.file)
+
+    def close_spider(self, spider):
+        print('Exporter closed')
+        self.file.write(']')
+        self.file.close()
+        
+    def process_item(self, item, spider):
+        line = json.dumps(dict(item)) + ",\n"
+        self.file.write(line)
+        return item
+
+
+class HflinksalePipeline(object):
+    def open_spider(self, spider):
+        print('Exporter opened')
+
+        self.file = open('hflink.json', 'a')
+        self.file.write('[')
+        # self.exporter = JsonLinesItemExporter(self.file)
+
+    def close_spider(self, spider):
+        print('Exporter closed')
+        self.file.write(']')
+        self.file.close()
+        
+    def process_item(self, item, spider):
+        line = json.dumps(dict(item)) + ",\n"
+        self.file.write(line)
+        return item
+
+
+class ThaigerPipeline(object):
+    def open_spider(self, spider):
+        print('Exporter opened')
+
+        self.file = open('thaiger.json', 'a')
+        self.file.write('[')
+        # self.exporter = JsonLinesItemExporter(self.file)
+
+    def close_spider(self, spider):
+        print('Exporter closed')
+        self.file.write(']')
+        self.file.close()
+        
+    def process_item(self, item, spider):
+        line = json.dumps(dict(item)) + ",\n"
+        self.file.write(line)
+        return item
+
+
+class ThaisrcPipeline(object):
+    def open_spider(self, spider):
+        print('Exporter opened')
+
+        self.file = open('bkkaccident.json', 'a')
+        self.file.write('[')
+        # self.exporter = JsonLinesItemExporter(self.file)
+
+    def close_spider(self, spider):
+        print('Exporter closed')
+        self.file.write(']')
+        self.file.close()
+        
+    def process_item(self, item, spider):
+        line = json.dumps(dict(item)) + ",\n"
+        self.file.write(line)
+        return item
+
+
+class HfrentPipeline(object):
+    def open_spider(self, spider):
+        print('Exporter opened')
+
+        self.file = open('crawlerbot/spiders/hfrent.json', 'w', encoding='utf8')
+        self.file.write('[')
+        # self.exporter = JsonLinesItemExporter(self.file)
+
+    def close_spider(self, spider):
+        print('Exporter closed')
+        self.file.write(']')
+        self.file.close()
+
+    def process_item(self, item, spider):
+        line = json.dumps(dict(item), ensure_ascii=False) + ",\n"
+        self.file.write(line)
+        return item
+
+    

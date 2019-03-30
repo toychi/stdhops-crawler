@@ -63,9 +63,16 @@ DOWNLOAD_DELAY = 3
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#     'crawlerbot.pipelines.CrawlerbotPipeline': 300,
-# }
+FILE_NAME = 'path/outputfile.ext'
+ITEM_PIPELINES = {
+   # 'crawlerbot.pipelines.CrawlerbotPipeline': 300,
+   # 'crawlerbot.pipelines.ThaihometownPipeline' : 600
+   # 'crawlerbot.pipelines.HomefinderPipeline' : 600
+   # 'crawlerbot.pipelines.ThaisrcPipeline' : 600
+   # 'crawlerbot.pipelines.HflinkrentPipeline' : 600
+   # 'crawlerbot.pipelines.HflinksalePipeline' : 600
+   # 'crawlerbot.pipelines.aqiPipeline' : 600
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

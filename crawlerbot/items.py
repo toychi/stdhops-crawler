@@ -16,6 +16,8 @@ class CrawlerbotItem(scrapy.Item):
 
 class HouseLinkItem(scrapy.Item):
     id = scrapy.Field()
+    
+class ThaihometownItem(scrapy.Item):
     name = scrapy.Field()
     link = scrapy.Field()
     maps = scrapy.Field()
@@ -35,3 +37,23 @@ class HouseItem(scrapy.Item):
     price = scrapy.Field()
     latlng = scrapy.Field()
     date = scrapy.Field()
+class HflinkItem(scrapy.Item):
+    name = scrapy.Field()
+    link = scrapy.Field()
+
+
+class HfItem(scrapy.Item):
+    id = scrapy.Field()
+    name = scrapy.Field()
+    type = scrapy.Field()
+    area = scrapy.Field()
+    size = scrapy.Field()
+    price = scrapy.Field()
+    bed = scrapy.Field()
+    bath = scrapy.Field()
+    latlng = scrapy.Field()
+
+
+class ThaigerlinkrentItem(scrapy.Item):
+    name = scrapy.Field()
+    link = scrapy.Field()
