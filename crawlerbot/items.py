@@ -37,6 +37,8 @@ class HouseItem(scrapy.Item):
     price = scrapy.Field()
     latlng = scrapy.Field()
     date = scrapy.Field()
+
+    
 class HflinkItem(scrapy.Item):
     name = scrapy.Field()
     link = scrapy.Field()

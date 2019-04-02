@@ -63,7 +63,7 @@ DOWNLOAD_DELAY = 3
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-FILE_NAME = 'path/outputfile.ext'
+# FILE_NAME = 'path/outputfile.ext'
 ITEM_PIPELINES = {
    # 'crawlerbot.pipelines.CrawlerbotPipeline': 300,
    # 'crawlerbot.pipelines.ThaihometownPipeline' : 600
@@ -95,4 +95,4 @@ AUTOTHROTTLE_ENABLED = True
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-LOG_LEVEL = 'WARNING'
+# LOG_LEVEL = 'WARNING'

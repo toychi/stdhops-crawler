@@ -49,7 +49,6 @@ class MongoPipeline(object):
     def __init__(self):
         self.mongo_uri = 'mongodb://127.0.0.1:27017'
         self.mongo_db = 'stdhops'
-        # self.collection_name = 'house'
         self.collection_name = 'houseeeee'
 
     def open_spider(self, spider):
