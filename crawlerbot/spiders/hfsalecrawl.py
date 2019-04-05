@@ -5,17 +5,17 @@ import re
 
 
 class homefinderSpider(scrapy.Spider):
-    name = 'hfrentcrawlspider'
+    name = 'hfsalecrawlspider'
 
     custom_settings = {
         'ITEM_PIPELINES': {
-            'crawlerbot.pipelines.HfrentPipeline': 400
+            'crawlerbot.pipelines.HfsalePipeline': 400
         }
         # 'LOG_FILE': 'crawlerbot/logs/demospider.log',
         # 'LOG_LEVEL': 'DEBUG'
     }
 
-    with open('C:/Users/Administrator/Desktop/Senior/GitCrawl/stdhops-crawler/crawlerbot/spiders/hflinkrent.json', 'r') as f:
+    with open('C:/Users/Administrator/Desktop/Senior/GitCrawl/stdhops-crawler/crawlerbot/spiders/hflinksale.json', 'r') as f:
         data = json.load(f)
         urls = [d['link'] for d in data]
         start_urls = urls
