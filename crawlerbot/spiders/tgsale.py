@@ -6,10 +6,11 @@ import re
 
 class thaigersaleSpider(scrapy.Spider):
     name = 'tgsalespider'
+    collection_name = 'tgsale'
 
     custom_settings = {
         'ITEM_PIPELINES': {
-            'crawlerbot.pipelines.TgsalePipeline': 400
+            'crawlerbot.pipelines.MongoPipeline': 400
         }
         # 'LOG_FILE': 'crawlerbot/logs/demospider.log',
         # 'LOG_LEVEL': 'DEBUG'

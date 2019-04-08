@@ -6,10 +6,11 @@ import re
 
 class thaigerrentSpider(scrapy.Spider):
     name = 'tgrentspider'
+    collection_name = 'tgrent'
 
     custom_settings = {
         'ITEM_PIPELINES': {
-            'crawlerbot.pipelines.TgrentPipeline': 400
+            'crawlerbot.pipelines.MongoPipeline': 400
         }
         # 'LOG_FILE': 'crawlerbot/logs/demospider.log',
         # 'LOG_LEVEL': 'DEBUG'

@@ -6,10 +6,11 @@ import re
 
 class homefinderSpider(scrapy.Spider):
     name = 'hfsalecrawlspider'
+    collection_name = 'hfsale'
 
     custom_settings = {
         'ITEM_PIPELINES': {
-            'crawlerbot.pipelines.HfsalePipeline': 400
+            'crawlerbot.pipelines.MongoPipeline': 400
         }
         # 'LOG_FILE': 'crawlerbot/logs/demospider.log',
         # 'LOG_LEVEL': 'DEBUG'

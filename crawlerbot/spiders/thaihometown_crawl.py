@@ -11,6 +11,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class ThaihometownCrawlSpider(scrapy.Spider):
     name = 'thaihometown_crawl'
+    collection_name = 'thhouse'
 
     custom_settings = {
         'ITEM_PIPELINES': {
