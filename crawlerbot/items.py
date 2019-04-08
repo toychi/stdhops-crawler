@@ -56,6 +56,19 @@ class HfItem(scrapy.Item):
     latlng = scrapy.Field()
 
 
-class ThaigerlinkrentItem(scrapy.Item):
+class ThaigerlinkItem(scrapy.Item):
     name = scrapy.Field()
     link = scrapy.Field()
+
+	
+class TgItem(scrapy.Item):
+    id = scrapy.Field()
+    name = scrapy.Field()
+    location = scrapy.Field()
+    type = scrapy.Field()
+    area = scrapy.Field()
+    size = scrapy.Field()
+    price = scrapy.Field()
+    bed = scrapy.Field()
+    bath = scrapy.Field()
+    latlng = scrapy.Field()
