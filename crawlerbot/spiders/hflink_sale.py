@@ -6,9 +6,10 @@ from crawlerbot.items import HflinkItem
 
 class hflinksaleSpider(scrapy.Spider):
 	name = 'hflinksalespider'
+	file_name = 'hflinksale.json'
 	custom_settings = {
 		'ITEM_PIPELINES': {
-			'crawlerbot.pipelines.HflinksalePipeline': 400
+			'crawlerbot.pipelines.LinksPipeline': 400
 		}
 	}
 	allowed_domains = ['homefinderbangkok.com']

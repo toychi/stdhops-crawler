@@ -6,9 +6,10 @@ from crawlerbot.items import HflinkItem
 
 class hflinkrentSpider(scrapy.Spider):
 	name = 'hflinkrentspider'
+	file_name = 'hflinkrent.json'
 	custom_settings = {
 		'ITEM_PIPELINES': {
-			'crawlerbot.pipelines.HflinkrentPipeline': 400
+			'crawlerbot.pipelines.LinksPipeline': 400
 		}
 		# 'LOG_FILE': 'crawlerbot/logs/demospider.log',
 		# 'LOG_LEVEL': 'DEBUG'

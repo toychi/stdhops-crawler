@@ -6,9 +6,10 @@ from crawlerbot.items import ThaigerlinkItem
 
 class thaigerlinkrentSpider(scrapy.Spider):
 	name = 'tglinkrentspider'
+	file_name = 'tglinkrent.json'
 	custom_settings = {
 		'ITEM_PIPELINES': {
-			'crawlerbot.pipelines.TglinkrentPipeline': 400
+			'crawlerbot.pipelines.LinksPipeline': 400
 		}
 	}
 	allowed_domains = ['property.thethaiger.com']
@@ -28,6 +29,6 @@ class thaigerlinkrentSpider(scrapy.Spider):
 		units = response.xpath('//div[@class="description_search"]/div[@class="hader_title"]/h3')
 		for h in units:
 			item = ThaigerlinkItem()
-			item['name'] = h.xpath('a/text()').extract()
-			item['link'] = h.xpath('a/@href').extract()
+			item['name'] = h.xpath('a/text()').extract_first()
+			item['link'] = h.xpath('a/@href').extract_first()
 			yield item

@@ -20,7 +20,7 @@ class ThaihometownCrawlSpider(scrapy.Spider):
         # 'LOG_LEVEL': 'DEBUG'
     }
 
-    with open('Links/Thaihometown/thaihometown_links.json', 'r') as f:
+    with open('crawlerbot/links/thaihometown_links.json', 'r') as f:
         data = json.load(f)
 
     urls = [d['link'] for d in data]

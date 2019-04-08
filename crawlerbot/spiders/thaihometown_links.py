@@ -7,9 +7,10 @@ import re
 
 class ThaihometownLinksSpider(scrapy.Spider):
     name = 'thaihometown_links'
+    file_name = 'thaihometown_links.json'
     custom_settings = {
         'ITEM_PIPELINES': {
-            'crawlerbot.pipelines.ThaihometownLinksPipeline': 400
+            'crawlerbot.pipelines.LinksPipeline': 400
         }
     }
     allowed_domains = ['thaihometown.com']

@@ -18,32 +18,6 @@ class CrawlerbotPipeline(object):
         return item
 
 
-class ThaihometownLinksPipeline(object):
-    def open_spider(self, spider):
-        print('Exporter opened')
-        # Create directory
-        dirName = 'Links/Thaihometown'
-
-        try:
-            # Create target Directory
-            os.makedirs(dirName)
-            print("Directory ", dirName, " Created ")
-        except FileExistsError:
-            print("Directory ", dirName, " already exists")
-
-        self.json_list = []
-        # self.file.write('[')
-
-    def close_spider(self, spider):
-        with open('Links/Thaihometown/thaihometown_links.json', 'w', encoding='utf8') as file:
-            file.write(json.dumps(self.json_list, indent=0, separators=(',', ':'), ensure_ascii=False))
-        print('Exporter closed')
-
-    def process_item(self, item, spider):
-        self.json_list.append(dict(item))
-        return item
-
-
 class MongoPipeline(object):
 
     def __init__(self):
@@ -62,44 +36,6 @@ class MongoPipeline(object):
 
     def process_item(self, item, spider):
         self.db[self.collection_name].insert(dict(item))
-        return item
-
-
-class HflinkrentPipeline(object):
-    def open_spider(self, spider):
-        print('Exporter opened')
-
-        self.file = open('links/hflinkrent.json', 'a')
-        self.file.write('[')
-        # self.exporter = JsonLinesItemExporter(self.file)
-
-    def close_spider(self, spider):
-        print('Exporter closed')
-        self.file.write(']')
-        self.file.close()
-        
-    def process_item(self, item, spider):
-        line = json.dumps(dict(item)) + ",\n"
-        self.file.write(line)
-        return item
-
-
-class HflinksalePipeline(object):
-    def open_spider(self, spider):
-        print('Exporter opened')
-
-        self.file = open('links/hflinksale.json', 'a')
-        self.file.write('[')
-        # self.exporter = JsonLinesItemExporter(self.file)
-
-    def close_spider(self, spider):
-        print('Exporter closed')
-        self.file.write(']')
-        self.file.close()
-        
-    def process_item(self, item, spider):
-        line = json.dumps(dict(item)) + ",\n"
-        self.file.write(line)
         return item
 
 
@@ -196,38 +132,26 @@ class HfsalePipeline(object):
         self.file.write(line)
         return item
 
-class TglinksalePipeline(object):
+class LinksPipeline(object):
     def open_spider(self, spider):
         print('Exporter opened')
+        # Create directory
+        dirName = 'crawlerbot/links'
+        try:
+            # Create target Directory
+            os.makedirs(dirName)
+            print("Directory ", dirName, " created ")
+        except FileExistsError:
+            print("Directory ", dirName, " already exists")
 
-        self.file = open('tglinksale.json', 'a')
-        self.file.write('[')
-        # self.exporter = JsonLinesItemExporter(self.file)
-
-    def close_spider(self, spider):
-        print('Exporter closed')
-        self.file.write(']')
-        self.file.close()
-        
-    def process_item(self, item, spider):
-        line = json.dumps(dict(item)) + ",\n"
-        self.file.write(line)
-        return item
-
-class TglinkrentPipeline(object):
-    def open_spider(self, spider):
-        print('Exporter opened')
-
-        self.file = open('tglinkrent.json', 'w')
-        self.file.write('[')
-        # self.exporter = JsonLinesItemExporter(self.file)
+        self.json_list = []
+        self.file_name = os.path.join(dirName, spider.file_name)
 
     def close_spider(self, spider):
+        with open(self.file_name, 'w', encoding='utf8') as outfile:
+            json.dump(self.json_list, outfile)
         print('Exporter closed')
-        self.file.write(']')
-        self.file.close()
         
     def process_item(self, item, spider):
-        line = json.dumps(dict(item)) + ",\n"
-        self.file.write(line)
-        return item		
+        self.json_list.append(dict(item))
+        return item	
