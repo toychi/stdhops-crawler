@@ -15,13 +15,12 @@ class thaigerrentSpider(scrapy.Spider):
         # 'LOG_LEVEL': 'DEBUG'
     }
 
-    with open('C:/Users/Administrator/Desktop/Senior/GitCrawl/stdhops-crawler/crawlerbot/spiders/tglinkrent.json', 'r') as f:
+    with open('crawlerbot/spiders/tglinkrent.json', 'r') as f:
         data = json.load(f)
         urls = [d['link'] for d in data]
         start_urls = urls
 
     def parse(self, response):
-        item = TgItem()
         item = TgItem()
         item['id'] = response.xpath('//div[@class="unit_id"]/strong/text()').extract_first()
         item['name'] = response.xpath('//h2[@class="project_title"]/a/text()').extract_first()

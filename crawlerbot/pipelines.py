@@ -38,7 +38,7 @@ class HflinkrentPipeline(object):
     def open_spider(self, spider):
         print('Exporter opened')
 
-        self.file = open('hflinkrent.json', 'a')
+        self.file = open('links/hflinkrent.json', 'a')
         self.file.write('[')
         # self.exporter = JsonLinesItemExporter(self.file)
 
@@ -57,7 +57,7 @@ class HflinksalePipeline(object):
     def open_spider(self, spider):
         print('Exporter opened')
 
-        self.file = open('hflinksale.json', 'a')
+        self.file = open('links/hflinksale.json', 'a')
         self.file.write('[')
         # self.exporter = JsonLinesItemExporter(self.file)
 
@@ -76,7 +76,7 @@ class TgrentPipeline(object):
     def open_spider(self, spider):
         print('Exporter opened')
 
-        self.file = open('C:/Users/Administrator/Desktop/Senior/GitCrawl/stdhops-crawler/crawlerbot/spiders/tgrent.json', 'w', encoding='utf8')
+        self.file = open('crawlerbot/spiders/tgrent.json', 'w', encoding='utf8')
         self.file.write('[')
         # self.exporter = JsonLinesItemExporter(self.file)
 
@@ -95,7 +95,7 @@ class TgsalePipeline(object):
     def open_spider(self, spider):
         print('Exporter opened')
 
-        self.file = open('C:/Users/Administrator/Desktop/Senior/GitCrawl/stdhops-crawler/crawlerbot/spiders/tgsale.json', 'w', encoding='utf8')
+        self.file = open('crawlerbot/spiders/tgsale.json', 'w', encoding='utf8')
         self.file.write('[')
         # self.exporter = JsonLinesItemExporter(self.file)
 
@@ -133,7 +133,7 @@ class HfrentPipeline(object):
     def open_spider(self, spider):
         print('Exporter opened')
 
-        self.file = open('C:/Users/Administrator/Desktop/Senior/GitCrawl/stdhops-crawler/crawlerbot/spiders/hfrent.json', 'w', encoding='utf8')
+        self.file = open('crawlerbot/spiders/hfrent.json', 'w', encoding='utf8')
         self.file.write('[')
         # self.exporter = JsonLinesItemExporter(self.file)
 
@@ -151,7 +151,7 @@ class HfsalePipeline(object):
     def open_spider(self, spider):
         print('Exporter opened')
 
-        self.file = open('C:/Users/Administrator/Desktop/Senior/GitCrawl/stdhops-crawler/crawlerbot/spiders/hfsale.json', 'w', encoding='utf8')
+        self.file = open('crawlerbot/spiders/hfsale.json', 'w', encoding='utf8')
         self.file.write('[')
         # self.exporter = JsonLinesItemExporter(self.file)
 

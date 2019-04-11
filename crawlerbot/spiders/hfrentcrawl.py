@@ -15,7 +15,7 @@ class homefinderSpider(scrapy.Spider):
         # 'LOG_LEVEL': 'DEBUG'
     }
 
-    with open('C:/Users/Administrator/Desktop/Senior/GitCrawl/stdhops-crawler/crawlerbot/spiders/hflinkrent.json', 'r') as f:
+    with open('crawlerbot/spiders/hflinkrent.json', 'r') as f:
         data = json.load(f)
         urls = [d['link'] for d in data]
         start_urls = urls
