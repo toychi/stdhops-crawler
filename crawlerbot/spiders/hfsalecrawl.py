@@ -24,8 +24,11 @@ class homefinderSpider(scrapy.Spider):
         item = HfItem()
         item['id'] = response.xpath('//div[@class="wrap clearfix"]/h4/text()').extract_first()[15:22]
         item['name'] = response.xpath('//div[@class="propertyname"]/text()').extract_first()[1:]
+        item['location'] = response.xpath('//div[@class="property-address"]/text()').extract_first()
         item['type'] = response.xpath('//div[@class="wrap clearfix"]/h5/span/small/text()').extract()[0][3:]
         item['size'] = response.xpath('//div[@class="property-meta clearfix"]/span/text()').extract()[0][1:]
+        item['floor'] = response.xpath('//div[@class="box floors"]/span/text()').extract_first()
+        item['yearbuilt'] = response.xpath('//div[@class="box built"]/span/text()').extract_first()
         item['price'] = response.xpath('//div[@class="wrap clearfix"]/h5/span/text()').extract()[1][1:]
         item['bed'] = response.xpath('//div[@class="property-meta clearfix"]/span/text()').extract()[1][1:]
         item['bath'] = response.xpath('//div[@class="property-meta clearfix"]/span/text()').extract()[2][1:]

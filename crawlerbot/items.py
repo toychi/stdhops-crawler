@@ -27,9 +27,12 @@ class HflinkItem(scrapy.Item):
 class HfItem(scrapy.Item):
     id = scrapy.Field()
     name = scrapy.Field()
+    location = scrapy.Field()
     type = scrapy.Field()
     area = scrapy.Field()
     size = scrapy.Field()
+    floor = scrapy.Field()
+    yearbuilt = scrapy.Field()
     price = scrapy.Field()
     bed = scrapy.Field()
     bath = scrapy.Field()
@@ -40,7 +43,7 @@ class ThaigerlinkItem(scrapy.Item):
     name = scrapy.Field()
     link = scrapy.Field()
 
-	
+    
 class TgItem(scrapy.Item):
     id = scrapy.Field()
     name = scrapy.Field()
@@ -48,7 +51,11 @@ class TgItem(scrapy.Item):
     type = scrapy.Field()
     area = scrapy.Field()
     size = scrapy.Field()
+    floor = scrapy.Field()
+    yearbuilt = scrapy.Field()
     price = scrapy.Field()
     bed = scrapy.Field()
     bath = scrapy.Field()
+    furniture = scrapy.Field()
+    daypost = scrapy.Field()
     latlng = scrapy.Field()
