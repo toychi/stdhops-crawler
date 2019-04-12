@@ -1925,5 +1925,5 @@
 {"id": "HF-5411", "name": "Supalai Wellington", "type": "Condo", "size": "250 Sq M", "price": "฿28,000,000 ", "bed": "4 Bedrooms", "bath": "5 Bathrooms", "latlng": ["13.767613", "100.57653900000003"]},
 {"id": "HF-5410", "name": "Noble Ora", "type": "Condo", "size": "79 Sq M", "price": "฿10,900,000 ", "bed": "1 Bedroom", "bath": "1 Bathroom", "latlng": ["13.7332376", "100.58228789999998"]},
 {"id": "HF 5402", "name": "Noble Revo Silom", "type": "Condo", "size": "66 Sq M", "price": "฿9,400,000 ", "bed": "2 Bedrooms", "bath": "2 Bathrooms", "latlng": ["13.7205384", "100.51835940000001"]},
-{"id": "HF-5398", "name": "Edge Sukhumvit 23", "type": "Condo", "size": "62.22 Sq M", "price": "฿17,600,000 ", "bed": "2 Bedrooms", "bath": "2 Bathrooms", "latlng": ["13.7367621", "100.56294539999999"]},
+{"id": "HF-5398", "name": "Edge Sukhumvit 23", "type": "Condo", "size": "62.22 Sq M", "price": "฿17,600,000 ", "bed": "2 Bedrooms", "bath": "2 Bathrooms", "latlng": ["13.7367621", "100.56294539999999"]}
 ]
