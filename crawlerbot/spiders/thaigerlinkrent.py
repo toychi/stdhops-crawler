@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from scrapy.selector import Selector
-from crawlerbot.items import ThaigerlinkItem
+from crawlerbot.items import PropertyLinkItem
 
 
 class thaigerlinkrentSpider(scrapy.Spider):
@@ -28,7 +28,9 @@ class thaigerlinkrentSpider(scrapy.Spider):
 	def parse_attr(self, response):
 		units = response.xpath('//div[@class="description_search"]/div[@class="hader_title"]/h3')
 		for h in units:
-			item = ThaigerlinkItem()
+			item = PropertyLinkItem()
 			item['name'] = h.xpath('a/text()').extract_first()
 			item['link'] = h.xpath('a/@href').extract_first()
+			item['pid'] = item['link'].split('-')[-2].upper() + '-' + item['link'].split('-')[-1]
+			item['maps'] = "https://property.thethaiger.com/get-map/unit/" + item['pid']
 			yield item

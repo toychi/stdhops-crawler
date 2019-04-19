@@ -10,6 +10,7 @@ class homefinderSpider(scrapy.Spider):
 
     custom_settings = {
         'ITEM_PIPELINES': {
+            'crawlerbot.pipelines.JsonPipeline': 300,
             'crawlerbot.pipelines.MongoPipeline': 400
         }
         # 'LOG_FILE': 'crawlerbot/logs/demospider.log',

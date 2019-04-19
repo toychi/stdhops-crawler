@@ -83,3 +83,43 @@ pipeline = [
 ]
 
 pprint.pprint(list(db[collection_name].aggregate(pipeline)))
+
+
+pipeline = [
+    { "$match": {} },
+    # clean listed date
+    { "$addFields": {
+        "splited_listdate": {
+            "$split": [{"$arrayElemAt": [{"$split": ["$date", " | "]}, 1]}, " "]
+            }
+        }
+    },
+    {"$addFields": {
+        "monthString": {
+            "$arrayElemAt": ["$splited_listdate", 4]
+            }
+        }
+    },
+    {"$addFields": {
+        "month": {
+            "$let": {
+                "vars": {
+                    "monthsInString": [" ", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฏาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"]},
+                "in": {
+                    "$indexOfArray": ['$$monthsInString', '$monthString']}
+                }
+            }
+        }
+    },
+    {"$addFields": {
+        "day": {"$toInt": {"$arrayElemAt": ["$splited_listdate", 3]}},
+        "year": {"$subtract": [{"$toInt": {"$arrayElemAt": ["$splited_listdate", 5]}}, 543]},
+        "upday": {"$toInt": {"$arrayElemAt": ["$splited_updatedate", 3]}}
+        }
+    },
+    {"$addFields": {
+        "listed_date": {"$dateFromParts": {"year": "$year", "month": "$month", "day": "$day"}}
+        }
+    },
+    { "$out": "house" }
+]

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from scrapy.selector import Selector
-from crawlerbot.items import HouseLinkItem
+from crawlerbot.items import PropertyLinkItem
 import re
 
 
@@ -28,8 +28,8 @@ class ThaihometownLinksSpider(scrapy.Spider):
     def parse_attr(self, response):
         units = response.xpath('//div[@class="namedesw7"]/div[@onmouseover]')
         for h in units:
-            item = HouseLinkItem()
-            item['id'] = re.sub('[a-zA-Z]', '', h.xpath('@id').extract_first())
+            item = PropertyLinkItem()
+            item['pid'] = re.sub('[a-zA-Z]', '', h.xpath('@id').extract_first())
             item['name'] = h.xpath('a/text()').extract_first()
             item['link'] = h.xpath('a/@href').extract_first()
             item['maps'] = h.xpath('table/tr/td[@class="tablelist"]/a[contains(@href, "maps")]/@href').extract_first()
