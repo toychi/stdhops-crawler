@@ -1,16 +1,16 @@
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
-from crawlerbot.spiders.thaigerlinksale import thaigerlinksaleSpider
-from crawlerbot.spiders.thaigerlinkrent import thaigerlinkrentSpider
-from crawlerbot.spiders.tgrent import thaigerrentSpider
-from crawlerbot.spiders.tgsale import thaigersaleSpider
+from crawlerbot.spiders.tglinksale import tglinksaleSpider
+from crawlerbot.spiders.tglinkrent import tglinkrentSpider
+from crawlerbot.spiders.tgrent import tgrentSpider
+from crawlerbot.spiders.tgsale import tgsaleSpider
 
 
 process = CrawlerProcess(get_project_settings())
 
 # Thaigerproperty Links
-process.crawl(thaigerlinksaleSpider)
-process.crawl(thaigerlinkrentSpider)
+process.crawl(tglinksaleSpider)
+process.crawl(tglinkrentSpider)
 
 # # Thaigerproperty Properties
 # process.crawl(thaigerrentSpider)

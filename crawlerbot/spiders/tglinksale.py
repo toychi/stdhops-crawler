@@ -4,24 +4,24 @@ from scrapy.selector import Selector
 from crawlerbot.items import PropertyLinkItem
 
 
-class thaigerlinkrentSpider(scrapy.Spider):
-	name = 'tglinkrentspider'
-	output_name = 'tglinkrent.json'
+class tglinksaleSpider(scrapy.Spider):
+	name = 'tglinksalespider'
+	output_name = 'tglinksale'
 	custom_settings = {
 		'ITEM_PIPELINES': {
 			'crawlerbot.pipelines.JsonPipeline': 400
 		}
 	}
 	allowed_domains = ['property.thethaiger.com']
-	start_urls = ['https://property.thethaiger.com/property-for-rent/bangkok?lng=en&zoom=12&hide_similar=1&available_unit=1&mapOnOff=off&page=1&per-page=20']
+	start_urls = ['https://property.thethaiger.com/property-for-sale/bangkok?lng=en&zoom=12&hide_similar=1&available_unit=1&mapOnOff=off&page=1&per-page=20']
 
-	BASE_URL = 'https://property.thethaiger.com/property-for-rent/bangkok?lng=en&zoom=12&hide_similar=1&available_unit=1&mapOnOff=off&page='
+	BASE_URL = 'https://property.thethaiger.com/property-for-sale/bangkok?lng=en&zoom=12&hide_similar=1&available_unit=1&mapOnOff=off&page='
 
 	APPEND_URL = '&per-page=20'
 
 	def parse(self, response):
-		# last_page = response.xpath('//div[@class="pagination"]/a/text()').extract_first()182
-		for i in range(1, 182):
+		# for i in range(1, 139):
+		for i in range(1, 10):
 			absolute_url = self.BASE_URL + str(i) + self.APPEND_URL
 			yield scrapy.Request(absolute_url, callback=self.parse_attr)
 

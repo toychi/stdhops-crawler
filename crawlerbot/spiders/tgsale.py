@@ -4,7 +4,7 @@ import json
 import re
 
 
-class thaigersaleSpider(scrapy.Spider):
+class tgsaleSpider(scrapy.Spider):
     name = 'tgsalespider'
     output_name = 'tgsale'
 
@@ -17,10 +17,13 @@ class thaigersaleSpider(scrapy.Spider):
         # 'LOG_LEVEL': 'DEBUG'
     }
 
-    with open('crawlerbot/json/tglinksale.json', 'r') as f:
-        data = json.load(f)
-        urls = [d['link'] for d in data]
-        start_urls = urls
+    try:
+        with open('crawlerbot/json/tglinksale.json', 'r') as f:
+            data = json.load(f)
+            urls = [d['link'] for d in data]
+            start_urls = urls
+    except FileNotFoundError:
+        pass
 
     def parse(self, response):
         item = TgItem()
