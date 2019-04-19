@@ -19,47 +19,7 @@ class PropertyLinkItem(scrapy.Item):
     name = scrapy.Field()
     link = scrapy.Field()
     maps = scrapy.Field()
-    
-class ThaihometownItem(scrapy.Item):
-    name = scrapy.Field()
-    link = scrapy.Field()
-    maps = scrapy.Field()
 
-
-class RenthomefinderItem(scrapy.Item):
-    maps = scrapy.Field()
-    link = scrapy.Field()
-
-
-class HouseItem(scrapy.Item):
-    id = scrapy.Field()
-    name = scrapy.Field()
-    room = scrapy.Field()
-    district = scrapy.Field()
-    area = scrapy.Field()
-    price = scrapy.Field()
-    latlng = scrapy.Field()
-    date = scrapy.Field()
-
-    
-class HflinkItem(scrapy.Item):
-    name = scrapy.Field()
-    link = scrapy.Field()
-
-
-class HfItem(scrapy.Item):
-    id = scrapy.Field()
-    name = scrapy.Field()
-    location = scrapy.Field()
-    type = scrapy.Field()
-    area = scrapy.Field()
-    size = scrapy.Field()
-    floor = scrapy.Field()
-    yearbuilt = scrapy.Field()
-    price = scrapy.Field()
-    bed = scrapy.Field()
-    bath = scrapy.Field()
-    latlng = scrapy.Field()
     
 class TgItem(scrapy.Item):
     pid = scrapy.Field()

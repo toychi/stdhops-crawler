@@ -6,7 +6,7 @@ import re
 
 class thaigersaleSpider(scrapy.Spider):
     name = 'tgsalespider'
-    collection_name = 'tgsale'
+    output_name = 'tgsale'
 
     custom_settings = {
         'ITEM_PIPELINES': {
@@ -17,7 +17,7 @@ class thaigersaleSpider(scrapy.Spider):
         # 'LOG_LEVEL': 'DEBUG'
     }
 
-    with open('crawlerbot/links/tglinksale.json', 'r') as f:
+    with open('crawlerbot/json/tglinksale.json', 'r') as f:
         data = json.load(f)
         urls = [d['link'] for d in data]
         start_urls = urls

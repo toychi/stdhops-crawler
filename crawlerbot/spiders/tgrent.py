@@ -6,7 +6,7 @@ import re
 
 class thaigerrentSpider(scrapy.Spider):
     name = 'tgrentspider'
-    collection_name = 'tgrent'
+    output_name = 'tgrent'
 
     custom_settings = {
         'ITEM_PIPELINES': {
@@ -17,7 +17,7 @@ class thaigerrentSpider(scrapy.Spider):
         # 'LOG_LEVEL': 'DEBUG'
     }
 
-    with open('crawlerbot/links/tglinkrent.json', 'r') as f:
+    with open('crawlerbot/json/tglinkrent.json', 'r') as f:
         data = json.load(f)
         urls = [d['link'] for d in data]
         start_urls = urls

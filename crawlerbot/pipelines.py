@@ -27,7 +27,7 @@ class MongoPipeline(object):
     def open_spider(self, spider):
         self.client = pymongo.MongoClient(self.mongo_uri)
         self.db = self.client[self.mongo_db]
-        self.collection_name = spider.collection_name
+        self.collection_name = spider.output_name
         print("Connected to MongoDB")
 
     def close_spider(self, spider):
@@ -44,7 +44,7 @@ class JsonPipeline(object):
         print('Exporter opened')
         # Create directory
         curDir = os.path.dirname(os.path.abspath(__file__))
-        dirName = os.path.join(curDir, 'crawlerbot/json')
+        dirName = os.path.join(curDir, 'json')
         try:
             # Create target Directory
             os.makedirs(dirName)
@@ -53,7 +53,7 @@ class JsonPipeline(object):
             print("Directory ", dirName, " already exists")
 
         self.json_list = []
-        self.file_name = os.path.join(dirName, spider.collection_name + '.json')
+        self.file_name = os.path.join(dirName, spider.output_name + '.json')
 
     def close_spider(self, spider):
         with open(self.file_name, 'w', encoding='utf8') as outfile:
@@ -62,48 +62,4 @@ class JsonPipeline(object):
         
     def process_item(self, item, spider):
         self.json_list.append(dict(item))
-        return item	
-		
-
-class ThaisrcPipeline(object):
-    def open_spider(self, spider):
-        print('Exporter opened')
-
-        self.file = open('bkkaccident.json', 'a')
-        self.file.write('[')
-        # self.exporter = JsonLinesItemExporter(self.file)
-
-    def close_spider(self, spider):
-        print('Exporter closed')
-        self.file.write(']')
-        self.file.close()
-        
-    def process_item(self, item, spider):
-        line = json.dumps(dict(item)) + ",\n"
-        self.file.write(line)
         return item
-
-
-class LinksPipeline(object):
-    def open_spider(self, spider):
-        print('Exporter opened')
-        # Create directory
-        dirName = 'crawlerbot/links'
-        try:
-            # Create target Directory
-            os.makedirs(dirName)
-            print("Directory ", dirName, " created ")
-        except FileExistsError:
-            print("Directory ", dirName, " already exists")
-
-        self.json_list = []
-        self.file_name = os.path.join(dirName, spider.file_name)
-
-    def close_spider(self, spider):
-        with open(self.file_name, 'w', encoding='utf8') as outfile:
-            json.dump(self.json_list, outfile)
-        print('Exporter closed')
-        
-    def process_item(self, item, spider):
-        self.json_list.append(dict(item))
-        return item	

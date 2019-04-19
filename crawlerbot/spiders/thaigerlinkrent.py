@@ -6,10 +6,10 @@ from crawlerbot.items import PropertyLinkItem
 
 class thaigerlinkrentSpider(scrapy.Spider):
 	name = 'tglinkrentspider'
-	file_name = 'tglinkrent.json'
+	output_name = 'tglinkrent.json'
 	custom_settings = {
 		'ITEM_PIPELINES': {
-			'crawlerbot.pipelines.LinksPipeline': 400
+			'crawlerbot.pipelines.JsonPipeline': 400
 		}
 	}
 	allowed_domains = ['property.thethaiger.com']
