@@ -4,6 +4,8 @@ from crawlerbot.spiders.tglinksale import tglinksaleSpider
 from crawlerbot.spiders.tglinkrent import tglinkrentSpider
 from crawlerbot.spiders.tgrent import tgrentSpider
 from crawlerbot.spiders.tgsale import tgsaleSpider
+from crawlerbot.spiders.hflinksale import hflinksaleSpider
+from crawlerbot.spiders.hflinkrent import hflinkrentSpider
 
 
 process = CrawlerProcess(get_project_settings())
@@ -12,8 +14,12 @@ process = CrawlerProcess(get_project_settings())
 # process.crawl(tglinksaleSpider)
 # process.crawl(tglinkrentSpider)
 
-# Thaigerproperty Properties
-process.crawl(tgrentSpider)
-process.crawl(tgsaleSpider)
+# # Thaigerproperty Properties
+# process.crawl(tgrentSpider)
+# process.crawl(tgsaleSpider)
+
+# Homefinder Links
+process.crawl(hflinkrentSpider)
+process.crawl(hflinksaleSpider)
 
 process.start()
