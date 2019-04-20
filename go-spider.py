@@ -8,11 +8,12 @@ from crawlerbot.spiders.tgsale import tgsaleSpider
 
 process = CrawlerProcess(get_project_settings())
 
-# Thaigerproperty Links
-process.crawl(tglinksaleSpider)
-process.crawl(tglinkrentSpider)
+# # Thaigerproperty Links
+# process.crawl(tglinksaleSpider)
+# process.crawl(tglinkrentSpider)
 
-# # Thaigerproperty Properties
-# process.crawl(thaigerrentSpider)
-# process.crawl(thaigersaleSpider)
+# Thaigerproperty Properties
+process.crawl(tgrentSpider)
+process.crawl(tgsaleSpider)
+
 process.start()

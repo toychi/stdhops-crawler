@@ -30,7 +30,7 @@ class tglinksaleSpider(scrapy.Spider):
 		for h in units:
 			item = PropertyLinkItem()
 			item['name'] = h.xpath('a/text()').extract_first()
-			item['link'] = h.xpath('a/@href').extract_first()
+			item['link'] = 'https://property.thethaiger.com' + h.xpath('a/@href').extract_first()
 			item['pid'] = item['link'].split('-')[-2].upper() + '-' + item['link'].split('-')[-1]
 			item['maps'] = "https://property.thethaiger.com/get-map/unit/" + item['pid']
 			yield item

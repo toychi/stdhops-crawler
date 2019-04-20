@@ -2,6 +2,8 @@ import scrapy
 from crawlerbot.items import TgItem
 import json
 import re
+import os
+from datetime import datetime, timedelta
 
 
 class tgsaleSpider(scrapy.Spider):
@@ -14,14 +16,16 @@ class tgsaleSpider(scrapy.Spider):
             'crawlerbot.pipelines.MongoPipeline': 400
         }
         # 'LOG_FILE': 'crawlerbot/logs/demospider.log',
-        # 'LOG_LEVEL': 'DEBUG'
+        # 'LOG_LEVEL': 'WARNING'
     }
-
+    curDir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    dirName = os.path.join(curDir, 'json')
     try:
-        with open('crawlerbot/json/tglinksale.json', 'r') as f:
+        with open(os.path.join(dirName, 'tglinksale.json'), 'r') as f:
             data = json.load(f)
             urls = [d['link'] for d in data]
-            start_urls = urls
+            # start_urls = urls
+            start_urls = urls[:10]
     except FileNotFoundError:
         pass
 
@@ -33,9 +37,9 @@ class tgsaleSpider(scrapy.Spider):
         item['ptype'] = response.xpath('//ul[@class="basic-list"]/li/strong/text()').extract()[0]
         item['size'] = response.xpath('//div[@class="txt"]/strong/text()').extract()[2].split()[0]
         if item['ptype'] == 'Condo':
-            item['floor'] = response.xpath('//ul[@class="property-list"]/li/img[contains(@class,"floor_logo")]/../div/text()').extract_first()
+            item['floor'] = response.xpath('//ul[@class="property-list"]/li/img[contains(@class,"floor_logo")]/../div/text()').extract_first().strip()
         else:
-            item['floor'] = response.xpath('//ul[@class="basic-list"]/li/span[contains(text()," Number of Floors in Building:")]/../strong/text()').extract_first()
+            item['floor'] = response.xpath('//ul[@class="basic-list"]/li/span[contains(text(),"Number of Floors in Building")]/../strong/text()').extract_first().strip()
         complete_year = response.xpath('//ul[@class="basic-list"]/li/strong[contains(text(),"Completed")]/text()').extract_first().split()
         item['yearbuilt'] = complete_year[1][1:] + ' ' +complete_year[2][:-1]
         item['price'] = response.xpath('//span[@class="unit_price"]/text()').extract_first()[1:]
@@ -43,8 +47,9 @@ class tgsaleSpider(scrapy.Spider):
             item['price'] = item['price'].replace(',','')
         item['bed'] = response.xpath('//div[@class="txt"]/strong/text()').extract_first()
         item['bath'] = response.xpath('//div[@class="txt"]/strong/text()').extract()[1]
-        item['furniture'] = response.xpath('//ul[@class="basic-list"]/li/strong[contains(text(),"Furnished")]/text()').extract_first().strip()
-        item['daypost'] = response.xpath('//li[@class="hidden-sm hidden-xs"]/text()').extract_first().split()[0]
+        item['furniture'] = response.xpath('//ul[@class="basic-list"]/li/span[contains(text(),"Furniture")]/../strong/text()').extract_first().strip()
+        daypost = response.xpath('//li[@class="hidden-sm hidden-xs"]/text()').extract_first().split()[0]
+        item['daypost'] = datetime.utcnow() - timedelta(days=int(daypost))
         # Map
         map_url = "https://property.thethaiger.com/get-map/unit/" + item['pid']
         request = scrapy.Request(map_url, callback=self.parse_latlng)
