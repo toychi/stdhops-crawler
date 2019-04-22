@@ -12,9 +12,9 @@ from crawlerbot.district_names import district_map
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 
 
-class thsaleSpider(scrapy.Spider):
-    name = 'thsalespider'
-    output_name = 'thsale'
+class threntSpider(scrapy.Spider):
+    name = 'threntspider'
+    output_name = 'thrent'
 
     custom_settings = {
         'ITEM_PIPELINES': {
@@ -28,12 +28,12 @@ class thsaleSpider(scrapy.Spider):
     curDir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     dirName = os.path.join(curDir, 'json')
     try:
-        with open(os.path.join(dirName, 'thlinksale.json'), 'r') as f:
+        with open(os.path.join(dirName, 'thlinkrent.json'), 'r') as f:
             data = json.load(f)
             urls = [d['link'] for d in data]
             # start_urls = urls
             # start_urls = urls[:10]
-            start_urls = ['https://www.thaihometown.com/condo/1655442','https://www.thaihometown.com/condo/1655375']
+            start_urls = ['https://www.thaihometown.com/home/1398887', 'https://www.thaihometown.com/condo/1475282', 'https://www.thaihometown.com/condo/1591028']
     except FileNotFoundError:
         pass
 
@@ -57,7 +57,7 @@ class thsaleSpider(scrapy.Spider):
             item['size'] = float(area[0]) * 4
         else:
             item['size'] = float(area[0])
-        price = response.xpath('//a[@class="linkprice"]/text()').extract_first().split()
+        price = response.xpath('//a[contains(text(),"ให้เช่า")]/text()').extract_first().split()
         item['price'] = price[1].replace(',','')
         item['daypost'] = response.xpath('//div[@class="datedetail"]/text()').extract_first()
         map_url = response.xpath('//iframe[@id="GMap"]/@src').extract_first()
@@ -69,8 +69,8 @@ class thsaleSpider(scrapy.Spider):
         elif ggmap_url:
             browser = webdriver.Chrome()
             browser.get(ggmap_url)
-            wait = WebDriverWait(browser, 60)
-            browser.find_element_by_xpath("//div[@id='pclose']").click()
+            wait = WebDriverWait(browser, 30)
+            # browser.find_element_by_xpath("//div[@id='pclose']").click()
             browser.execute_script("window.scrollTo(0, document.body.scrollHeight/2);")
             # browser.implicitly_wait(30) # seconds
             browser.switch_to.frame(browser.find_element_by_xpath('//div[@id="divMapFull"]/iframe'))

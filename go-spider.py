@@ -9,7 +9,9 @@ from crawlerbot.spiders.hflinkrent import hflinkrentSpider
 from crawlerbot.spiders.hfrent import hfrentSpider
 from crawlerbot.spiders.hfsale import hfsaleSpider
 from crawlerbot.spiders.thlinksale import thlinksaleSpider
-from crawlerbot.spiders.thsale import thsalespiderSpider
+from crawlerbot.spiders.thlinkrent import thlinkrentSpider
+from crawlerbot.spiders.thsale import thsaleSpider
+from crawlerbot.spiders.thrent import threntSpider
 
 
 process = CrawlerProcess(get_project_settings())
@@ -32,8 +34,10 @@ process = CrawlerProcess(get_project_settings())
 
 # # Thaihometown Links
 # process.crawl(thlinksaleSpider)
+# process.crawl(thlinkrentSpider)
 
 # Thaihometown Properties
-process.crawl(thsalespiderSpider)
+process.crawl(thsaleSpider)
+process.crawl(threntSpider)
 
 process.start()
