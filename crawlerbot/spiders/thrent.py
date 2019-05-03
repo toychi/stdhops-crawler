@@ -57,7 +57,7 @@ class threntSpider(scrapy.Spider):
             item['size'] = float(area[0]) * 4
         else:
             item['size'] = float(area[0])
-        price = response.xpath('//a[contains(text(),"ให้เช่า")]/text()').extract_first().split()
+        price = response.xpath('//a[contains(text(),"บาท/เดือน")]/text()').extract()[1].split()
         item['price'] = price[1].replace(',','')
         item['daypost'] = response.xpath('//div[@class="datedetail"]/text()').extract_first()
         map_url = response.xpath('//iframe[@id="GMap"]/@src').extract_first()
