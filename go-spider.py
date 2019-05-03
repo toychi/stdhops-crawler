@@ -28,7 +28,7 @@ process = CrawlerProcess(get_project_settings())
 # process.crawl(hflinkrentSpider)
 # process.crawl(hflinksaleSpider)
 
-# # Homefinder Properties
+# Homefinder Properties
 # process.crawl(hfrentSpider)
 # process.crawl(hfsaleSpider)
 
@@ -36,8 +36,8 @@ process = CrawlerProcess(get_project_settings())
 # process.crawl(thlinksaleSpider)
 # process.crawl(thlinkrentSpider)
 
-# Thaihometown Properties
-process.crawl(thsaleSpider)
+# # Thaihometown Properties
+# process.crawl(thsaleSpider)
 process.crawl(threntSpider)
 
 process.start()

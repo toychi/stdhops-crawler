@@ -11,6 +11,7 @@ import re
 import os
 import pymongo
 import codecs
+import datetime
 
 
 class CrawlerbotPipeline(object):
@@ -57,9 +58,13 @@ class JsonPipeline(object):
 
     def close_spider(self, spider):
         with open(self.file_name, 'w', encoding='utf8') as outfile:
-            json.dump(self.json_list, outfile)
+            json.dump(self.json_list, outfile, default = self.myconverter)
         print('Exporter closed')
         
     def process_item(self, item, spider):
         self.json_list.append(dict(item))
         return item
+
+    def myconverter(_, o):
+        if isinstance(o, datetime.datetime):
+            return o.__str__()

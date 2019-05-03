@@ -20,8 +20,8 @@ class tglinkrentSpider(scrapy.Spider):
 	APPEND_URL = '&per-page=20'
 
 	def parse(self, response):
-		# for i in range(1, 182):
-		for i in range(1, 10):
+		# 182 pages - 29/04/19
+		for i in range(1, 182):
 			absolute_url = self.BASE_URL + str(i) + self.APPEND_URL
 			yield scrapy.Request(absolute_url, callback=self.parse_attr)
 

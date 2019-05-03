@@ -23,10 +23,10 @@ class thlinkrentSpider(scrapy.Spider):
     def parse(self, response):
         # last_page = response.xpath('//div[@id="PList"]/span/text()').extract_first().split('/')[1]
         # for i in range(1, int(last_page)):
-        for i in range(1, 10):
+        for i in range(1, 100):
             absolute_url = self.BASE_URL + str(i) + self.APPEND_URL_1
             yield scrapy.Request(absolute_url, callback=self.parse_attr)
-        for i in range(1, 10):
+        for i in range(1, 100):
             absolute_url = self.BASE_URL + str(i) + self.APPEND_URL_2
             yield scrapy.Request(absolute_url, callback=self.parse_attr)
 

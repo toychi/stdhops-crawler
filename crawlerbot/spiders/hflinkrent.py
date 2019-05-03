@@ -21,8 +21,8 @@ class hflinkrentSpider(scrapy.Spider):
 
 	def parse(self, response):
 		# last_page = response.xpath('//div[@class="pagination"]/a/text()').extract_first()
-		# for i in range(1, 367):
-		for i in range(1, 5):
+		# 385 pages - 29/04/19
+		for i in range(1, 385):
 			absolute_url = self.BASE_URL + str(i)
 			yield scrapy.Request(absolute_url, callback=self.parse_attr)
 

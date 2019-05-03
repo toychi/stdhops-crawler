@@ -24,8 +24,8 @@ class tgsaleSpider(scrapy.Spider):
         with open(os.path.join(dirName, 'tglinksale.json'), 'r') as f:
             data = json.load(f)
             urls = [d['link'] for d in data]
-            # start_urls = urls
-            start_urls = urls[:10]
+            start_urls = urls
+            # start_urls = urls[:10]
     except FileNotFoundError:
         pass
 
@@ -33,6 +33,8 @@ class tgsaleSpider(scrapy.Spider):
         item = TgItem()
         item['pid'] = response.xpath('//div[@class="unit_id"]/strong/text()').extract_first()
         item['name'] = response.xpath('//h2[@class="project_title"]/a/text()').extract_first()
+        if item['name'] is None:
+            item['name'] = response.xpath('//h2[@class="project_title"]/text()').extract_first()
         item['location'] = response.xpath('//ul[@class="basic-list"]/li/strong/text()').extract()[1].split(',')[0].strip()
         item['ptype'] = response.xpath('//ul[@class="basic-list"]/li/strong/text()').extract()[0]
         item['size'] = response.xpath('//div[@class="txt"]/strong/text()').extract()[2].split()[0]
@@ -40,8 +42,15 @@ class tgsaleSpider(scrapy.Spider):
             item['floor'] = response.xpath('//ul[@class="property-list"]/li/img[contains(@class,"floor_logo")]/../div/text()').extract_first().strip()
         else:
             item['floor'] = response.xpath('//ul[@class="basic-list"]/li/span[contains(text(),"Number of Floors in Building")]/../strong/text()').extract_first().strip()
-        complete_year = response.xpath('//ul[@class="basic-list"]/li/strong[contains(text(),"Completed")]/text()').extract_first().split()
-        item['yearbuilt'] = complete_year[1][1:] + ' ' +complete_year[2][:-1]
+        complete_year = response.xpath('//ul[@class="basic-list"]/li/strong[contains(text(),"Completed")]/text()').extract_first()
+        if complete_year is None: 
+            item["yearbuilt"] = "Offplan"
+        else:
+            yearbuilt = complete_year.split()
+            if len(yearbuilt) == 3:
+                item['yearbuilt'] = yearbuilt[1][1:] + ' ' + yearbuilt[2][:-1]
+            else:
+                item['yearbuilt'] = "Completed"
         item['price'] = response.xpath('//span[@class="unit_price"]/text()').extract_first()[1:]
         if item['price'] is not None:
             item['price'] = item['price'].replace(',','')

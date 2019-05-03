@@ -32,8 +32,8 @@ class threntSpider(scrapy.Spider):
             data = json.load(f)
             urls = [d['link'] for d in data]
             # start_urls = urls
-            # start_urls = urls[:10]
-            start_urls = ['https://www.thaihometown.com/home/1398887', 'https://www.thaihometown.com/condo/1475282', 'https://www.thaihometown.com/condo/1591028']
+            start_urls = urls[:5000]
+            # start_urls = ['https://www.thaihometown.com/home/1398887', 'https://www.thaihometown.com/condo/1475282', 'https://www.thaihometown.com/condo/1591028']
     except FileNotFoundError:
         pass
 

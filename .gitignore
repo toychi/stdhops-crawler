@@ -106,5 +106,6 @@ venv.bak/
 # Editor directories and files
 .idea
 .DS_Store
+.vscode
 
 

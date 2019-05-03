@@ -30,7 +30,7 @@ class hfsaleSpider(scrapy.Spider):
             data = json.load(f)
             urls = [d['link'] for d in data]
             # start_urls = urls
-            start_urls = urls[:10]
+            start_urls = urls[500:]
     except FileNotFoundError:
         pass
 
@@ -38,10 +38,12 @@ class hfsaleSpider(scrapy.Spider):
         item = TgItem()
         item['pid'] = response.xpath('//div[@class="wrap clearfix"]/h4/text()').extract_first().split()[-1]
         item['name'] = response.xpath('//div[@class="propertyname"]/text()').extract_first().strip()
-        address = response.xpath('//div[@class="property-address"]/text()').extract_first().title()
-        item['location'] = hfsaleSpider.p.search(address).group(1)
-        if item['location'] in district_map.keys():
-            item['location'] = district_map[item['location']]
+        address = response.xpath('//div[@class="property-address"]/text()').extract_first()
+        if address is not None:
+            m = hfsaleSpider.p.search(address.title())
+            item['location'] = m.group(1) if m is not None else ""
+            if item['location'] in district_map.keys():
+                item['location'] = district_map[item['location']]
         item['ptype'] = response.xpath('//div[@class="wrap clearfix"]/h5/span/small/text()').extract_first().split()[-1]
         item['size'] = response.xpath('//div[@class="property-meta clearfix"]/span/text()').extract_first().split()[0]
         # item['floor'] = response.xpath('//div[@class="box floors"]/span/text()').extract_first()
