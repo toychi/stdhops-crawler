@@ -4,6 +4,7 @@ import json
 import re
 import os
 from crawlerbot.district_names import districts, district_map
+import datetime
 
 
 class hfrentSpider(scrapy.Spider):
@@ -47,6 +48,8 @@ class hfrentSpider(scrapy.Spider):
         item['ptype'] = response.xpath('//div[@class="wrap clearfix"]/h5/span/small/text()').extract_first().split()[-1]
         item['size'] = response.xpath('//div[@class="property-meta clearfix"]/span/text()').extract_first().split()[0]
         # item['floor'] = response.xpath('//div[@class="box floors"]/span/text()').extract_first()
+        posted_link = response.xpath('//ul[@class="slides"]/li/a/@href').extract_first()
+        item['daypost'] = datetime.datetime.strptime(re.match('(\d+)\/(\d+)', posted_link), '%Y/%m')
         item['yearbuilt'] = response.xpath('//div[@class="box built"]/span/text()').extract_first()
         item['price'] = response.xpath('//div[@class="wrap clearfix"]/h5/span/text()').extract()[1].split()[0][1:].replace(',','')
         item['bed'] = response.xpath('//div[@class="property-meta clearfix"]/span/text()').extract()[1].split()[0]

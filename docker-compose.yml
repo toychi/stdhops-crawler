@@ -9,10 +9,10 @@ services:
     image: mongo:latest
     container_name: "mymongodb"
     environment:
-      - MONGO_DATA_DIR=/home/stdhops/data/db
+      - MONGO_DATA_DIR=/home/spatioreps/data/db
       - MONGO_LOG_DIR=/dev/null
     volumes:
-      - ./data/db:/home/stdhops/data/db
+      - ./data/db:/home/spatioreps/data/db
     ports:
-      - 27017:27017
+      - 27018:27017
     command: mongod --smallfiles --logpath=/dev/null # --quiet

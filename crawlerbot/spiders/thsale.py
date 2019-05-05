@@ -69,7 +69,7 @@ class thsaleSpider(scrapy.Spider):
         elif ggmap_url:
             browser = webdriver.Chrome()
             browser.get(ggmap_url)
-            wait = WebDriverWait(browser, 60)
+            wait = WebDriverWait(browser, 30)
             browser.find_element_by_xpath("//div[@id='pclose']").click()
             browser.execute_script("window.scrollTo(0, document.body.scrollHeight/2);")
             # browser.implicitly_wait(30) # seconds
